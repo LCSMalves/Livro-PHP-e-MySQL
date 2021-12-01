@@ -15,7 +15,7 @@
 	R: Dia que começa o Calendario criado com base no numero do mes na function criacalendario
 
 	6 Criar calendario do ano todo
-	R: 
+	R: Criando uma function que com while cria os 12 meses 
 -->
 
 <!DOCTYPE html>
@@ -32,18 +32,18 @@
 
 	th {
 		font-weight: normal;
-		border: 1px solid black;
+		/* border: 1px solid black;*/
 	}
 
 	td {
-		border: 1px solid black;
+		/* border: 1px solid black;*/
 	}
 
 
 	table {
-		border: 1px solid black;
+		/* border: 1px solid black;*/
 		width: 400px;
-		height: 70px;
+		height:200px;
 	}
 
 	.fundocinza {
@@ -54,8 +54,16 @@
 		background-color:#DFF714;
 	}
 
-	#div1 {
-    display: flex;
+	.tabelas {
+		
+   
+
+	}
+
+	.div1 {
+    display: inline;
+    float:left;
+
 }
 </style>
 
@@ -106,20 +114,28 @@
 		while ($dia <= 31) {
 
 			if ($mesatual == date("n")) {
+				
 				if ($dia == $hoje) {
-				$dia = "<b class=marcardia>{$hoje}</b>";
+				$d = "<b class=marcardia>{$hoje}</b>";
+				array_push($semana, $d);
+
+				} else {
+					array_push($semana, $dia);
+
+					if (count($semana) == 7) {
+						$calendario .= linha($semana);
+						$semana = [];
+					}
+				}
+
 			} else {
-				$dia;
-			}
 
-			}
-			
+				array_push($semana, $dia);
 
-			array_push($semana, $dia);
-
-			if (count($semana) == 7) {
-				$calendario .= linha($semana);
-				$semana = [];
+				if (count($semana) == 7) {
+					$calendario .= linha($semana);
+					$semana = [];
+				}
 			}
 
 			$dia++;
@@ -235,26 +251,45 @@
 </table>";
 	}
 
-	function calendarioAnual() {
-		$mes = 1;
 
-		while ($mes <= 12) {
-			criaCalendarioMesEscolhido($mes);
-			$mes++;
+	function calendarioAnual() {
+		$n = 1;
+		$criando = [];
+
+		while ($n <= 12){
+
+			$c = criaCalendarioMesEscolhido($n);
+
+			array_push($criando, $c);
+
+			$n++;
 		}
-// cria um modo de como quatro messes um do lado do outro e apos continuar ate dezembro 
+
+		$n = 0;
+		$l = "";
+		$v = "<div class=div1>";
+
+		while ($n < 12) {
+			$l .= "<div class=div1>";
+			$l .= $criando[$n];
+			$l .= "</div>";
+
+			$n++;
+		}
+
+
+		return $l;
+
 	}
 
 ?>
 
 
-<?php 
-	echo criaCalendarioMesAtual();
-?>
 
-<?php 
+
+<div class="div1"><?php 
 	echo calendarioAnual();
-?>
+?></div>
 
 
 <!--
