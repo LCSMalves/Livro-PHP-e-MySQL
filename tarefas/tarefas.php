@@ -36,7 +36,6 @@ $lista_tarefas = [];
 
 if (array_key_exists('lista_tarefas', $_SESSION)) {
     $lista_tarefas = $_SESSION['lista_tarefas'];
-    
 } else {
     $lista_tarefas = [];
 }

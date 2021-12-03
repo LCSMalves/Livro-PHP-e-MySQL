@@ -1,56 +1,53 @@
-<?php session_start(); ?>
+<?php 
 
-<html>
-    <head>
-        <title>Gerenciador de contatos</title>
-        <link rel="stylesheet" href="tarefas.css">
-    </head>
+session_start(); 
 
-    <body>
-        <h1>Contatos</h1>
-        <form>
-            <fieldset>
-                <legend>Novo Contato</legend>
-                <label>
-                    Contatos:
-                    <input type="text" name="contato" />
-                </label>
-                <input type="submit" value="Cadastrar" />
-            </fieldset>
-        </form>
-
-        <?php 
-            $lista_contatos = [];
             
-            if (array_key_exists('contato', $_GET)) {
-                $lista_contatos[] = $_GET['contato'];
-            }
+if (array_key_exists('contato', $_GET) && $_GET['contato'] !='') {
+    
+    $contato = [];
+
+    $contato['contato'] = $_GET['contato'];
+
+    if (array_key_exists('telefone', $_GET)){
+        $contato['telefone'] = $_GET['telefone'];
+    } else {
+        $contato['telefone'] = '';
+    }
+
+    if (array_key_exists('email', $_GET)){
+        $contato['email'] = $_GET['email'];
+    } else {
+        $contato['email'] = '';
+    }
+
+    if (array_key_exists('nascimento', $_GET)){
+        $contato['nascimento'] = $_GET['nascimento'];
+    } else {
+        $contato['nascimento'] = '';
+    }
+
+    if (array_key_exists('descricao', $_GET)){
+        $contato['descricao'] = $_GET['descricao'];
+    } else {
+        $contato['descricao'] = '';
+    }
+
+    if (array_key_exists('favorito', $_GET)){
+        $contato['favorito'] = $_GET['favorito'];
+    } else {
+        $contato['favorito'] = '';
+    }
+
+    $_SESSION['lista_contatos'][] = $contato;
+}
             
-            if (array_key_exists('contato', $_GET)) {
-                $_SESSION['lista_contatos'][] = $_GET['contato'];
+$lista_contatos = [];
 
-            }
-            
-            $lista_contatos = [];
+if (array_key_exists('lista_contatos', $_SESSION)) {
+    $lista_contatos = $_SESSION['lista_contatos'];
+} else {
+    $lista_contatos = [];
+}
 
-            if (array_key_exists('lista_contatos', $_SESSION)) {
-                $lista_contatos = $_SESSION['lista_contatos'];
-            }
-        ?>
-
-
-    </body>
-
-    <table>
-        <tr>
-            <th>Contatos</th>
-        </tr>
-
-        <?php foreach ($lista_contatos as $contatos): ?>
-            <tr>
-                <td><?php echo $contatos; ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-
-</html>
+include "templatecontatos.php";
