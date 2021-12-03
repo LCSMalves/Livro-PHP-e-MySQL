@@ -1,55 +1,44 @@
-<?php session_start(); ?>
+<?php
 
-<html>
-    <head>
-        <title>Gerenciador de Tarefas</title>
-        <link rel="stylesheet" href="tarefas.css">
-    </head>
+session_start();
+
+
+if (array_key_exists('nome', $_GET) && $_GET['nome'] != '') {
     
-    <body>
-        <h1>Gerenciador de Tarefas</h1>
-        <form>
-            <fieldset>
-                <legend>Nova Tarefa</legend>
-                <label>
-                    Tarefas:
-                    <input type="text" name="nome" />
-                </label>
-                <input type="submit" value="Cadastrar" />
-            </fieldset>
-        </form>
-        
-        <?php 
-            $lista_tarefas = [];
-            
-            if (array_key_exists('nome', $_GET)) {
-                $lista_tarefas[] = $_GET['nome'];
-            }
-            
-            if (array_key_exists('nome', $_GET)) {
-                $_SESSION['lista_tarefas'][] = $_GET['nome'];
+    $tarefa = [];
 
-            }
-            
-            $lista_tarefas = [];
+    $tarefa['nome'] = $_GET['nome'];
 
-            if (array_key_exists('lista_tarefas', $_SESSION)) {
-                $lista_tarefas = $_SESSION['lista_tarefas'];
-            }
-        ?>
+    if (array_key_exists('descricao', $_GET)) {
+        $tarefa['descricao'] = $_GET['descricao'];
+    } else {
+        $tarefa['descricao'] = '';
+    }
 
-    </body>
+    if (array_key_exists('prazo', $_GET)) {
+        $tarefa['prazo'] = $_GET['prazo'];
+    } else {
+        $tarefa['prazo'] = '';
+    }
 
-    <table>
-        <tr>
-            <th>Tarefas</th>
-        </tr>
+    $tarefa['prioridade'] = $_GET['prioridade'];
 
-        <?php foreach ($lista_tarefas as $tarefas): ?>
-            <tr>
-                <td><?php echo $tarefas; ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    if (array_key_exists('concluida', $_GET)) {
+        $tarefa['concluida'] = $_GET['concluida'];
+    } else {
+        $tarefa['concluida'] = '';
+    }
 
-</html>
+    $_SESSION['lista_tarefas'][] = $tarefa;
+}
+
+$lista_tarefas = [];
+
+if (array_key_exists('lista_tarefas', $_SESSION)) {
+    $lista_tarefas = $_SESSION['lista_tarefas'];
+    
+} else {
+    $lista_tarefas = [];
+}
+
+include "template.php";
