@@ -2,6 +2,8 @@
 
 session_start(); 
 
+require "bancocontatos.php";
+require "ajudantescontatos.php";
             
 if (array_key_exists('contato', $_GET) && $_GET['contato'] !='') {
     
@@ -22,7 +24,7 @@ if (array_key_exists('contato', $_GET) && $_GET['contato'] !='') {
     }
 
     if (array_key_exists('nascimento', $_GET)){
-        $contato['nascimento'] = $_GET['nascimento'];
+        $contato['nascimento'] = traduz_data_para_banco($_GET['nascimento']);
     } else {
         $contato['nascimento'] = '';
     }
@@ -34,20 +36,16 @@ if (array_key_exists('contato', $_GET) && $_GET['contato'] !='') {
     }
 
     if (array_key_exists('favorito', $_GET)){
-        $contato['favorito'] = $_GET['favorito'];
+        $contato['favorito'] = 1;
     } else {
-        $contato['favorito'] = '';
+        $contato['favorito'] = 0;
     }
 
-    $_SESSION['lista_contatos'][] = $contato;
+    gravar_contato($conexao, $contato);
 }
             
 $lista_contatos = [];
 
-if (array_key_exists('lista_contatos', $_SESSION)) {
-    $lista_contatos = $_SESSION['lista_contatos'];
-} else {
-    $lista_contatos = [];
-}
+$lista_contatos = buscar_contato($conexao);
 
 include "templatecontatos.php";
