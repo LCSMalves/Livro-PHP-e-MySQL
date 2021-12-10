@@ -23,11 +23,11 @@
                 </label>
                 <label>
                     Hora de Entrada:
-                    <input type="text" name="hora_entrada" />
+                    <input type="datetime-local" name="hora_entrada" />
                 </label>
                 <label>
                     Hoora de Saida:
-                    <input type="text" name="hora_saida" />
+                    <input type="datetime-local" name="hora_saida" />
                 </label>
                 <input type="submit" value="Cadastrar" />
             </fieldset>
@@ -37,16 +37,16 @@
                 <th>Placa</th>
                 <th>Marca</th>
                 <th>Modelo</th>
-                <th>Hora de Entrada</th>
-                <th>Hora de Saida</th>
+                <th>Hora e Data de Entrada</th>
+                <th>Hora e Data de Saida</th>
             </tr>
             <?php foreach ($lista_estacionamento as $estacionamento) : ?>
                 <tr>
                     <td><?php echo $estacionamento['placa']; ?></td>
                     <td><?php echo $estacionamento['marca']; ?></td>
                     <td><?php echo $estacionamento['modelo']; ?></td>
-                    <td><?php echo $estacionamento['hora_entrada']; ?></td>
-                    <td><?php echo $estacionamento['hora_saida']; ?></td>
+                    <td><?php echo traduz_data_para_exibir($estacionamento['hora_entrada']); ?></td>
+                    <td><?php echo traduz_data_para_exibir($estacionamento['hora_saida']); ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
