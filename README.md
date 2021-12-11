@@ -15,6 +15,6 @@
 
         *Pasta "Contatos" - Contem a lista de contatos criada nos desafios do livro, no qual cria uma lista de contatos, podendo marcar alguns contatos como favoritos.
 
-        *Pasta "Estacionamento" - Contem os códigos do programa que registra a entrada e saia de veículos em um estacionamento, marcando data e hora de entra e saída, além das informações do veiculo, como placa, marca e modelo.
+        *Pasta "Estacionamento" - Contem os códigos do programa que registra a data e hora de entra e saída, além das informações do veículos, como placa, marca e modelo.
  
  Atualmente estou no capitulo 9, consegui, alguns com certo esforço, realizar todos os desafios que são propostos nos capítulo anteriores, começam pelo capitulo 3.
